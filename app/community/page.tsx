@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Community and Events",
   description:
-    "Join Autoimmune Support Kenya's community events — movie watch parties, raffle draws, and support meetups for patients and caregivers.",
+    "Join Autoimmune Support Kenya's community — online watch parties, webinars, and support meetups for patients and caregivers.",
 };
 
 const activities = [
@@ -21,7 +22,7 @@ const activities = [
   },
   {
     name: "Raffle Draws",
-    text: "Fun, low-pressure fundraising with prizes — at events and online.",
+    text: "Fun, low-pressure fundraising with prizes — we're working out the details, and will announce the first draw in the group.",
     icon: (
       <>
         <path d="M8 18v-4a2 2 0 0 1 2-2h28a2 2 0 0 1 2 2v4a4 4 0 0 0 0 12v4a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2v-4a4 4 0 0 0 0-12Z" strokeLinejoin="round" />
@@ -101,28 +102,30 @@ export default function CommunityPage() {
             Upcoming events
           </h2>
           <p className="mt-4 max-w-xl mx-auto">
-            Our events calendar is being finalized. Subscribe or get in touch
-            and we&apos;ll let you know as soon as the next movie night, raffle,
-            or meetup is confirmed.
+            The next big one is the Mega Walk and Run on 22 November. Webinars,
+            watch parties, and meetups are announced first in our Facebook
+            group of {site.facebookMembers} patients and caregivers.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link
-              href="/contact"
+            <a
+              href={site.facebook}
+              target="_blank"
+              rel="noopener"
               className="rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-6 py-3 transition-colors"
             >
-              RSVP for the Next Movie Night
-            </Link>
+              Join the Facebook Group
+            </a>
             <Link
-              href="/contact"
+              href="/resources#events"
               className="rounded-full bg-violet-deep hover:bg-violet-ink text-white font-bold px-6 py-3 transition-colors"
             >
-              Join a Support Circle
+              See Past Events
             </Link>
             <Link
-              href="/contact"
-              className="rounded-full bg-teal-care hover:bg-teal-dark text-white font-bold px-6 py-3 transition-colors"
+              href="/contact?reason=events"
+              className="rounded-full border-2 border-violet-deep text-violet-deep hover:bg-violet-deep hover:text-white font-bold px-6 py-3 transition-colors"
             >
-              Buy Raffle Tickets
+              Join a Support Circle
             </Link>
           </div>
         </div>

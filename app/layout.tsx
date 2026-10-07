@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s | Autoimmune Support Kenya",
   },
   description:
-    "Autoimmune Support Kenya unites patients, caregivers, and communities through the Mega Run and Walk, patient support giving, and community events.",
+    "Autoimmune Support Kenya unites patients, caregivers, and communities through the Mega Walk and Run, patient support giving, and community events.",
 };
 
 export default function RootLayout({

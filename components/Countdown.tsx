@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 function nextEventDate(): Date {
   const now = new Date();
   const year = now.getFullYear();
-  const event = new Date(year, 10, 22, 6, 0, 0); // 22 November, 6:00 AM
-  return now > event ? new Date(year + 1, 10, 22, 6, 0, 0) : event;
+  const event = new Date(year, 10, 22, 7, 0, 0); // 22 November, 7:00 AM
+  return now > event ? new Date(year + 1, 10, 22, 7, 0, 0) : event;
 }
 
 function diff(target: Date) {
@@ -47,9 +47,9 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div aria-label="Countdown to the Mega Run and Walk on 22 November">
+    <div aria-label="Countdown to the Mega Walk and Run on 22 November">
       <p className="text-white/90 font-semibold text-sm uppercase tracking-[0.25em] mb-3">
-        Mega Run and Walk · 22 November
+        Mega Walk and Run · 22 November
       </p>
       <div className="flex gap-2.5 sm:gap-4">
         <Bib value={time?.days ?? 0} label="Days" />

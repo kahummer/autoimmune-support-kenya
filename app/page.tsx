@@ -5,7 +5,7 @@ import { RibbonDivider } from "@/components/Ribbon";
 
 export const metadata: Metadata = {
   description:
-    "Autoimmune Support Kenya unites patients, caregivers, and communities through the Mega Run and Walk, patient support giving, and community events.",
+    "Autoimmune Support Kenya unites patients, caregivers, and communities through the Mega Walk and Run, patient support giving, and community events.",
 };
 
 const needs = [
@@ -46,13 +46,23 @@ const needs = [
       </>
     ),
   },
+  {
+    title: "Counselling & therapy",
+    text: "Emotional support for patients and caregivers.",
+    icon: (
+      <>
+        <path d="M10 12h28a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H22l-8 7v-7h-4a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4Z" strokeLinejoin="round" />
+        <path d="M24 28s-7-4-7-9a3.5 3.5 0 0 1 7-2 3.5 3.5 0 0 1 7 2c0 5-7 9-7 9Z" strokeLinejoin="round" />
+      </>
+    ),
+  },
 ];
 
 function NeedIcon({ children }: { children: React.ReactNode }) {
   return (
     <svg
       viewBox="0 0 48 48"
-      className="h-12 w-12 stroke-teal-care"
+      className="h-12 w-12 stroke-coral"
       fill="none"
       strokeWidth="2.5"
       strokeLinecap="round"
@@ -66,6 +76,14 @@ function NeedIcon({ children }: { children: React.ReactNode }) {
 export default function Home() {
   return (
     <>
+      {/* Announcement bar — the poster QR code lands on this page */}
+      <Link
+        href="/mega-run-and-walk#register"
+        className="block bg-coral hover:bg-coral-dark text-white text-center font-bold text-sm sm:text-base px-4 py-2.5 transition-colors"
+      >
+        Mega Walk and Run · 22 Nov — Register&nbsp;now&nbsp;→
+      </Link>
+
       {/* Hero */}
       <section className="bg-violet-deep relative overflow-hidden">
         <div
@@ -85,16 +103,16 @@ export default function Home() {
               <span className="block mt-2">Live Stronger.</span>
             </h1>
             <p className="mt-6 text-lg text-white/85 max-w-xl">
-              Autoimmune Support Kenya (AISK) by Saetwa Saitoti supports
-              patients and caregivers through community, practical giving, and
-              the annual Mega Run and Walk.
+              Autoimmune Support Kenya (AISK) supports patients and caregivers
+              through community, practical giving, and the annual Mega Run and
+              Walk.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="/mega-run-and-walk#register"
                 className="rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-7 py-3.5 transition-colors"
               >
-                Register for the Mega Run and Walk
+                Register for the Mega Walk and Run
               </Link>
               <Link
                 href="/support-a-patient"
@@ -128,7 +146,7 @@ export default function Home() {
         </h2>
         <p className="mt-5">
           Autoimmune Support Kenya walks alongside people living with
-          autoimmune conditions in Kenya. Through the Mega Run and Walk, a
+          autoimmune conditions in Kenya. Through the Mega Walk and Run, a
           dedicated patient-support donation platform, and regular community
           activities, AISK turns awareness into everyday, practical care.
         </p>
@@ -139,7 +157,7 @@ export default function Home() {
         </p>
         <Link
           href="/about"
-          className="inline-block mt-6 font-bold text-teal-care hover:text-teal-dark"
+          className="inline-block mt-6 font-bold text-coral hover:text-coral-dark"
         >
           Learn more about AISK →
         </Link>
@@ -152,18 +170,19 @@ export default function Home() {
         <div className="rounded-3xl bg-violet-deep text-white overflow-hidden grid md:grid-cols-[1fr_auto] items-center">
           <div className="p-8 sm:p-12">
             <p className="text-coral font-bold uppercase tracking-[0.25em] text-sm">
-              Flagship event · 22 November
+              Flagship event · Sunday 22 November
             </p>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold">
-              The Mega Run and Walk
+              The Mega Walk and Run
             </h2>
             <p className="mt-4 text-white/85 max-w-2xl">
-              Our flagship event brings the community together on 22 November
-              for a 5km walk, 10km run, and kids&apos; fun walk — raising funds
-              and awareness in one movement.
+              Sunday 22 November at The Waterfront, Karen, from 7:00 AM —
+              choose 3.5 km, 7.5 km or 14.5 km and raise funds and awareness
+              in one movement. Tickets KSh 3,000, including a medal, T-shirt
+              and water bottle.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["10km Run", "5km Walk", "Kids' Fun Walk", "Virtual"].map((c) => (
+              {["3.5 km", "7.5 km", "14.5 km", "The Waterfront, Karen"].map((c) => (
                 <span
                   key={c}
                   className="rounded-full bg-white/10 border border-white/25 px-4 py-1.5 text-sm font-semibold"
@@ -203,7 +222,7 @@ export default function Home() {
               essentials that restore comfort, mobility, and dignity.
             </p>
           </div>
-          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {needs.map((n) => (
               <div key={n.title} className="bg-white rounded-2xl p-6 shadow-sm">
                 <NeedIcon>{n.icon}</NeedIcon>
@@ -216,7 +235,7 @@ export default function Home() {
           </div>
           <Link
             href="/support-a-patient"
-            className="inline-block mt-8 rounded-full bg-teal-care hover:bg-teal-dark text-white font-bold px-7 py-3.5 transition-colors"
+            className="inline-block mt-8 rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-7 py-3.5 transition-colors"
           >
             Support a Patient
           </Link>
@@ -230,19 +249,20 @@ export default function Home() {
             Community and fun
           </h2>
           <p className="mt-4">
-            Beyond fundraising, AISK hosts movie watch parties, raffle draws,
+            Beyond fundraising, AISK hosts online watch parties, webinars,
             and support meetups so patients and caregivers can connect and
-            enjoy being together.
+            enjoy being together — join {"1,000+"} members in our Facebook
+            group.
           </p>
           <Link
             href="/community"
-            className="inline-block mt-6 font-bold text-teal-care hover:text-teal-dark"
+            className="inline-block mt-6 font-bold text-coral hover:text-coral-dark"
           >
             See community activities →
           </Link>
         </div>
         <ul className="grid grid-cols-2 gap-4">
-          {["Movie Watch Parties", "Raffle Draws", "Support Circles", "Wellness Days"].map(
+          {["Watch Parties", "Webinars", "Support Circles", "Wellness Days"].map(
             (a) => (
               <li
                 key={a}
@@ -265,13 +285,13 @@ export default function Home() {
             Saetwa Saitoti
           </h2>
           <p className="mt-4 max-w-2xl mx-auto">
-            Founder of Autoimmune Support Kenya, dedicated to helping
-            autoimmune patients across Kenya access dignity, practical support,
-            and community.
+            A counsellor and caregiver who founded Autoimmune Support Kenya
+            after walking with her daughter Shannon through paralysis,
+            misdiagnosis, and recovery from polymyositis.
           </p>
           <Link
             href="/about#founder"
-            className="inline-block mt-5 font-bold text-teal-care hover:text-teal-dark"
+            className="inline-block mt-5 font-bold text-coral hover:text-coral-dark"
           >
             Meet Saetwa →
           </Link>
@@ -289,13 +309,13 @@ export default function Home() {
         </p>
         <div className="mt-8 grid sm:grid-cols-3 gap-5">
           {[
-            "What Living With an Autoimmune Condition Really Looks Like",
-            "Why We Run and Walk Together",
-            "A Caregiver's Guide to Everyday Support",
-          ].map((t) => (
+            { t: "Shannon: from paralysis to walking again", h: "/stories/shannon" },
+            { t: "What are autoimmune conditions?", h: "/about#autoimmune" },
+            { t: "Event recaps: webinars, watch parties and more", h: "/resources#events" },
+          ].map(({ t, h }) => (
             <Link
               key={t}
-              href="/resources"
+              href={h}
               className="rounded-2xl bg-lavender p-6 font-semibold text-violet-deep hover:bg-violet-deep hover:text-white transition-colors"
             >
               {t}
@@ -319,7 +339,7 @@ export default function Home() {
               href="/mega-run-and-walk#register"
               className="rounded-full bg-white text-coral font-bold px-7 py-3.5 hover:bg-lavender transition-colors"
             >
-              Register for the Run and Walk
+              Register for the Walk and Run
             </Link>
             <Link
               href="/support-a-patient"

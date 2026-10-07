@@ -2,7 +2,7 @@
 
 Website for Autoimmune Support Kenya by Saetwa Saitoti — a patient-first
 community organization supporting people living with autoimmune conditions
-through the annual **Mega Run and Walk**, a patient-needs donation platform,
+through the annual **Mega Walk and Run**, a patient-needs donation platform,
 and community events.
 
 Built with [Next.js](https://nextjs.org) (App Router) and Tailwind CSS.
@@ -13,7 +13,7 @@ Built with [Next.js](https://nextjs.org) (App Router) and Tailwind CSS.
 | --- | --- |
 | Home | `/` |
 | About AISK | `/about` |
-| Mega Run and Walk | `/mega-run-and-walk` |
+| Mega Walk and Run | `/mega-run-and-walk` |
 | Support a Patient | `/support-a-patient` |
 | Community and Events | `/community` |
 | Get Involved | `/get-involved` |

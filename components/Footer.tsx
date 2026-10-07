@@ -1,24 +1,38 @@
+import Image from "next/image";
 import Link from "next/link";
-import Ribbon from "./Ribbon";
+import { site } from "@/lib/site";
 
 export default function Footer() {
   return (
     <footer className="bg-violet-ink text-white">
       <div className="mx-auto max-w-6xl px-4 py-14 grid gap-10 md:grid-cols-4">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-3">
-            <Ribbon className="h-9 w-9" />
-            <p className="font-[family-name:var(--font-poppins)] font-bold text-lg leading-tight">
-              Autoimmune Support Kenya
-            </p>
+          <div className="inline-block rounded-2xl bg-white p-3">
+            <Image
+              src="/logo.png"
+              alt="Autoimmune Support Kenya — Stronger Together, Unstoppable Always"
+              width={640}
+              height={600}
+              sizes="160px"
+              className="h-auto w-40"
+            />
           </div>
           <p className="mt-4 text-white/80 max-w-md">
-            AISK supports autoimmune patients through the Mega Run and Walk, a
+            AISK supports autoimmune patients through the Mega Walk and Run, a
             patient-needs donation platform, and community events.
           </p>
           <p className="mt-4 font-[family-name:var(--font-poppins)] font-semibold text-coral">
             You Are Not Alone.
           </p>
+          <ul className="mt-5 space-y-1.5 text-white/85 text-[0.95rem]">
+            <li>
+              <a href={`tel:${site.phoneIntl}`} className="hover:text-coral">{site.phone}</a>
+              {" · "}
+              <a href={site.whatsapp} className="hover:text-coral" target="_blank" rel="noopener">WhatsApp</a>
+            </li>
+            <li><a href={`mailto:${site.email}`} className="hover:text-coral break-all">{site.email}</a></li>
+            <li><a href={site.facebook} className="hover:text-coral" target="_blank" rel="noopener">Facebook support group</a></li>
+          </ul>
         </div>
 
         <nav aria-label="Footer">
@@ -27,7 +41,7 @@ export default function Footer() {
           </p>
           <ul className="space-y-2 text-white/85">
             <li><Link className="hover:text-coral" href="/about">About AISK</Link></li>
-            <li><Link className="hover:text-coral" href="/mega-run-and-walk">Mega Run and Walk</Link></li>
+            <li><Link className="hover:text-coral" href="/mega-run-and-walk">Mega Walk and Run</Link></li>
             <li><Link className="hover:text-coral" href="/support-a-patient">Support a Patient</Link></li>
             <li><Link className="hover:text-coral" href="/community">Community and Events</Link></li>
           </ul>

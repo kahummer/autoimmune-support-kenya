@@ -7,14 +7,9 @@ export default function PageHero({
   eyebrow?: string;
   title: string;
   subtitle: string;
-  tone?: "violet" | "teal" | "coral";
+  tone?: "violet" | "coral";
 }) {
-  const bg =
-    tone === "teal"
-      ? "bg-teal-care"
-      : tone === "coral"
-        ? "bg-coral"
-        : "bg-violet-deep";
+  const bg = tone === "coral" ? "bg-coral" : "bg-violet-deep";
   return (
     <section className={`${bg} text-white`}>
       <div className="mx-auto max-w-4xl px-4 py-16 sm:py-20 text-center">

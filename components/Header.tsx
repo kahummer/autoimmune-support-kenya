@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import Ribbon from "./Ribbon";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/mega-run-and-walk", label: "Mega Run and Walk" },
+  { href: "/mega-run-and-walk", label: "Mega Walk and Run" },
   { href: "/support-a-patient", label: "Support a Patient" },
   { href: "/community", label: "Community" },
   { href: "/get-involved", label: "Get Involved" },
@@ -28,8 +28,16 @@ export default function Header() {
           className="flex items-center gap-2 shrink-0"
           onClick={() => setOpen(false)}
         >
-          <Ribbon className="h-7 w-7" />
-          <span className="font-[family-name:var(--font-poppins)] font-700 leading-tight">
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            width={640}
+            height={516}
+            sizes="70px"
+            preload
+            className="h-14 w-auto"
+          />
+          <span className="font-[family-name:var(--font-poppins)] font-700 leading-tight lg:sr-only">
             <span className="block text-violet-deep font-bold text-sm tracking-wide">
               AUTOIMMUNE SUPPORT
             </span>
