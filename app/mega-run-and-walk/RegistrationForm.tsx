@@ -183,7 +183,7 @@ export default function RegistrationForm() {
           rows={4}
           required
           className={inputCls}
-          placeholder="Dear …, your transaction of KES 3,000.00 to SAETWA SAITOTI - AUTOIMMUNE AWARENESS 040444 was successful on … M-Pesa Ref: UJ7LE9IH50 …"
+          placeholder="Dear JANE DOE, your transaction of KES 3,000.00 to AUTOIMMUNE AWARENESS 040444 was successful on 22/10/2026 09:15 AM. M-Pesa Ref: AB1CD2EF34."
           aria-describedby={mpesaError ? "reg-mpesa-error" : undefined}
           aria-invalid={mpesaError ? true : undefined}
           onChange={() => mpesaError && setMpesaError(null)}
