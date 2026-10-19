@@ -43,7 +43,7 @@ export const warriorFee = 100;
 export const challenge150 = {
   dates: "20 October – 19 November 2026",
   price: 3000,
-  // StepUp app link for people joining without a T-shirt and medal. Leave
-  // empty until AISK shares it; the site then points people to WhatsApp.
-  stepUpUrl: "",
+  // StepUp app invite for people joining without a T-shirt and medal. If
+  // empty, the site points people to WhatsApp for the link instead.
+  stepUpUrl: "https://join.thestepupapp.com/PmUNjK",
 };
