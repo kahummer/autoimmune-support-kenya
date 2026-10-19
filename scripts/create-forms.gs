@@ -80,12 +80,9 @@ function buildForm_(spec) {
   // answers only that question.
   const entries = {};
   for (const [key, item] of Object.entries(items)) {
-    const type = item.getType();
-    const typed = type === FormApp.ItemType.LIST ? item.asListItem()
-      : type === FormApp.ItemType.PARAGRAPH_TEXT ? item.asParagraphTextItem()
-      : item.asTextItem();
-    const value = type === FormApp.ItemType.LIST ? typed.getChoices()[0].getValue() : "x";
-    const url = form.createResponse().withItemResponse(typed.createResponse(value)).toPrefilledUrl();
+    // The add*Item() results are already typed (TextItem, ListItem, …).
+    const value = item.getType() === FormApp.ItemType.LIST ? item.getChoices()[0].getValue() : "x";
+    const url = form.createResponse().withItemResponse(item.createResponse(value)).toPrefilledUrl();
     entries[key] = "entry." + url.match(/entry\.(\d+)=/)[1];
   }
 

@@ -1,8 +1,25 @@
 "use client";
 
 import PaidSignupForm from "@/components/PaidSignupForm";
-import { sendViaContactForm } from "@/lib/mpesa";
+import { postToGoogleForm } from "@/lib/mpesa";
 import { site, vendorPackages } from "@/lib/site";
+
+// "Mega Walk and Run 2026 – Vendor Sign-up" Google Form (created by
+// scripts/create-forms.gs); responses land in its linked Sheet. If a question
+// is added, renamed or reordered in Google Forms, update the entry IDs here.
+const GOOGLE_FORM_ID = "1FAIpQLSer4qThjJa6VXBocx2faGM3519LuR-XFM2a3YWGSGJq5SRenQ";
+const GOOGLE_FORM_ENTRIES = {
+  business: "entry.380485140",
+  contact: "entry.1703158349",
+  phone: "entry.125323347",
+  email: "entry.334661892",
+  products: "entry.2068902986",
+  package: "entry.1314344308",
+  notes: "entry.66823966",
+  mpesaMessage: "entry.1130316170",
+  mpesaCode: "entry.779580996",
+  mpesaAmount: "entry.1054901085",
+};
 
 const packageLabel = (p: (typeof vendorPackages)[number]) =>
   `${p.name} – KSh ${p.price.toLocaleString()}`;
@@ -33,27 +50,7 @@ export default function VendorForm() {
           hint: "Power, extra space, setup time, anything we should plan for.",
         },
       ]}
-      send={(v) =>
-        sendViaContactForm(
-          "VENDOR SIGN-UP — Mega Walk and Run 2026",
-          {
-            name: v.contact,
-            organization: v.business,
-            email: v.email,
-            phone: v.phone,
-            relationship: "Company / organisation",
-            reason: "Volunteer, sponsor, or partner",
-          },
-          [
-            ["Package", v.package],
-            ["Products", v.products],
-            ["Requirements", v.notes],
-            ["M-Pesa code", v.mpesaCode],
-            ["Amount", v.mpesaAmount],
-            ["M-Pesa message", v.mpesaMessage],
-          ]
-        )
-      }
+      send={(v) => postToGoogleForm(GOOGLE_FORM_ID, GOOGLE_FORM_ENTRIES, v)}
       success={(r) => (
         <>
           <h3 className="text-xl font-bold text-violet-deep">Your stall request is in 🎉</h3>
