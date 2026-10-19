@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Volunteer, sponsor, or partner with Autoimmune Support Kenya to support the Mega Walk and Run and patients living with autoimmune conditions.",
 };
 
-const ways = [
+const ways: { name: string; text: string; cta: string; href?: string; reason?: string }[] = [
   {
     name: "Volunteer",
     text: "Help with event logistics, meetups, and community outreach.",
@@ -20,6 +20,18 @@ const ways = [
     text: "Sponsor the Mega Walk and Run or an entire need category — diapers, supplements, gadgets, or medication.",
     cta: "Become a Sponsor",
     reason: "sponsor",
+  },
+  {
+    name: "Vendors",
+    text: "Sell or showcase at the Mega Walk and Run — Bronze, Silver and Gold stalls with tent, seats and tables.",
+    cta: "Book a Vendor Stall",
+    href: "/vendors",
+  },
+  {
+    name: "Autoimmune Warriors",
+    text: "Living with an autoimmune condition? Register for KSh 100 — it supports bereaved families.",
+    cta: "Register as a Warrior",
+    href: "/warriors",
   },
   {
     name: "Advocacy",
@@ -57,7 +69,7 @@ export default function GetInvolvedPage() {
                 {w.text}
               </p>
               <Link
-                href={`/contact?reason=${w.reason}`}
+                href={w.href ?? `/contact?reason=${w.reason}`}
                 className={`mt-6 self-start rounded-full font-bold px-6 py-2.5 transition-colors ${
                   i % 2 === 0
                     ? "bg-coral hover:bg-coral-dark text-white"

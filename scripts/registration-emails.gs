@@ -24,7 +24,7 @@ const EVENT = {
   name: "Mega Walk and Run 2026",
   date: "Sunday 22 November 2026",
   time: "7:00 AM start (arrive from 6:00 AM for check-in)",
-  venue: "The Waterfront, Karen, Nairobi",
+  venue: "The Hub, Karen, Nairobi",
   price: "KSh 3,000",
 };
 
@@ -190,6 +190,6 @@ function escapeHtml(s) {
 /** Preview helper: emails a sample ticket to the account running the script. */
 function sendTestTicket() {
   const me = Session.getEffectiveUser().getEmail();
-  const r = { name: "Jane Doe", phone: "0700 000 000", email: me, distance: "7.5 km", shirt: "M", code: "AB1CD2EF34", amount: 3000 };
+  const r = { name: "Jane Doe", phone: "0700 000 000", email: me, distance: "10 km", shirt: "M", code: "AB1CD2EF34", amount: 3000 };
   MailApp.sendEmail({ to: me, replyTo: REPLY_TO, name: "Autoimmune Support Kenya", subject: `[TEST] Your ${EVENT.name} registration — ref ${r.code}`, htmlBody: ticketHtml(r), body: ticketText(r) });
 }

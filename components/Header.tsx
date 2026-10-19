@@ -66,7 +66,7 @@ export default function Header() {
             href="/mega-run-and-walk#register"
             className="inline-block rounded-full bg-coral hover:bg-coral-dark text-white font-bold text-sm px-5 py-2.5 transition-colors"
           >
-            Register for the Run
+            Get Run Tickets
           </Link>
         </div>
 
@@ -110,7 +110,7 @@ export default function Header() {
             onClick={() => setOpen(false)}
             className="mt-2 rounded-full bg-coral text-white font-bold text-center px-5 py-3"
           >
-            Register for the Run
+            Get Run Tickets
           </Link>
         </nav>
       )}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import { RibbonDivider } from "@/components/Ribbon";
+import { megaRun } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
@@ -77,12 +78,15 @@ export default function Home() {
   return (
     <>
       {/* Announcement bar — the poster QR code lands on this page */}
-      <Link
-        href="/mega-run-and-walk#register"
-        className="block bg-coral hover:bg-coral-dark text-white text-center font-bold text-sm sm:text-base px-4 py-2.5 transition-colors"
-      >
-        Mega Walk and Run · 22 Nov — Register&nbsp;now&nbsp;→
-      </Link>
+      <div className="bg-coral text-white text-center font-bold text-sm sm:text-base px-4 py-2.5">
+        <Link href="/mega-run-and-walk#register" className="hover:underline">
+          Mega Walk and Run · 22 Nov · The Hub, Karen — Get&nbsp;tickets&nbsp;→
+        </Link>
+        <span className="mx-2 opacity-70" aria-hidden="true">|</span>
+        <Link href="/150km" className="hover:underline">
+          150km virtual challenge starts 20&nbsp;Oct&nbsp;→
+        </Link>
+      </div>
 
       {/* Hero */}
       <section className="bg-violet-deep relative overflow-hidden">
@@ -176,13 +180,14 @@ export default function Home() {
               The Mega Walk and Run
             </h2>
             <p className="mt-4 text-white/85 max-w-2xl">
-              Sunday 22 November at The Waterfront, Karen, from 7:00 AM —
-              choose 3.5 km, 7.5 km or 14.5 km and raise funds and awareness
-              in one movement. Tickets KSh 3,000, including a medal, T-shirt
-              and water bottle.
+              Sunday 22 November at {megaRun.venue}, from {megaRun.start} —
+              choose {megaRun.distances.join(", ")} and raise funds and
+              awareness in one movement. Tickets on Madfun from KSh{" "}
+              {megaRun.tickets[0].price.toLocaleString()}, including a{" "}
+              {megaRun.included}.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["3.5 km", "7.5 km", "14.5 km", "The Waterfront, Karen"].map((c) => (
+              {[...megaRun.distances, megaRun.venue].map((c) => (
                 <span
                   key={c}
                   className="rounded-full bg-white/10 border border-white/25 px-4 py-1.5 text-sm font-semibold"
@@ -195,8 +200,13 @@ export default function Home() {
               href="/mega-run-and-walk"
               className="inline-block mt-8 rounded-full bg-coral hover:bg-coral-dark font-bold px-7 py-3.5 transition-colors"
             >
-              Event details &amp; registration
+              Event details &amp; tickets
             </Link>
+            <div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm font-bold">
+              <Link href="/150km" className="text-white/90 hover:text-coral">150km virtual challenge →</Link>
+              <Link href="/vendors" className="text-white/90 hover:text-coral">Vendor stalls →</Link>
+              <Link href="/warriors" className="text-white/90 hover:text-coral">Warrior registration →</Link>
+            </div>
           </div>
           <div
             aria-hidden="true"

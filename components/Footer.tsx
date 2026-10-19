@@ -42,6 +42,7 @@ export default function Footer() {
           <ul className="space-y-2 text-white/85">
             <li><Link className="hover:text-coral" href="/about">About AISK</Link></li>
             <li><Link className="hover:text-coral" href="/mega-run-and-walk">Mega Walk and Run</Link></li>
+            <li><Link className="hover:text-coral" href="/150km">150km Virtual Challenge</Link></li>
             <li><Link className="hover:text-coral" href="/support-a-patient">Support a Patient</Link></li>
             <li><Link className="hover:text-coral" href="/community">Community and Events</Link></li>
           </ul>
@@ -53,6 +54,8 @@ export default function Footer() {
           </p>
           <ul className="space-y-2 text-white/85">
             <li><Link className="hover:text-coral" href="/get-involved">Get Involved</Link></li>
+            <li><Link className="hover:text-coral" href="/vendors">Vendors</Link></li>
+            <li><Link className="hover:text-coral" href="/warriors">Warrior Registration</Link></li>
             <li><Link className="hover:text-coral" href="/resources">Resources and Stories</Link></li>
             <li><Link className="hover:text-coral" href="/contact">Contact / Register</Link></li>
             <li><Link className="hover:text-coral" href="/support-a-patient">Donate</Link></li>

@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { site } from "@/lib/site";
+import { megaRun, site } from "@/lib/site";
+import { parseMpesaMessage } from "@/lib/mpesa";
 
 // Submissions go straight to the "Mega Walk and Run 2026 – Registration"
 // Google Form, whose responses land in its linked Google Sheet. The entry IDs
@@ -23,22 +24,7 @@ const GOOGLE_FORM_ENTRIES: Record<string, string> = {
   mpesaAmount: "entry.542231448",
 };
 
-export const TICKET_PRICE = 3000;
-
-// M-Pesa receipt numbers are 10 upper-case letters/digits (always with at
-// least one digit), e.g. UJ7LE9IH50. Bank SMSs label it "M-Pesa Ref:";
-// Safaricom's own SMS starts with it.
-const MPESA_REF_LABEL = /REF:?\s*([A-Z0-9]{10})\b/;
-const MPESA_CODE = /\b(?=[A-Z0-9]{10}\b)(?=[A-Z]*\d)([A-Z][A-Z0-9]{9})\b/;
-const MPESA_AMOUNT = /K(?:ES|SH|sh)\.?\s*([\d,]+(?:\.\d{1,2})?)/i;
-
-export function parseMpesaMessage(text: string) {
-  const upper = text.toUpperCase();
-  const code = upper.match(MPESA_REF_LABEL)?.[1] ?? upper.match(MPESA_CODE)?.[1] ?? null;
-  const amountRaw = text.match(MPESA_AMOUNT)?.[1];
-  const amount = amountRaw ? Number(amountRaw.replace(/,/g, "")) : null;
-  return { code, amount };
-}
+const TICKET_PRICE = megaRun.tickets[0].price;
 
 const inputCls =
   "w-full rounded-lg border-2 border-lavender bg-white px-4 py-2.5 focus:border-violet-deep transition-colors";
@@ -144,9 +130,9 @@ export default function RegistrationForm() {
         <label htmlFor="reg-category" className={labelCls}>Distance</label>
         <select id="reg-category" name="category" required className={inputCls} defaultValue="">
           <option value="" disabled>Choose a distance</option>
-          <option>3.5 km</option>
-          <option>7.5 km</option>
-          <option>14.5 km</option>
+          {megaRun.distances.map((d) => (
+            <option key={d}>{d}</option>
+          ))}
         </select>
       </div>
       <div>
@@ -213,7 +199,7 @@ export default function RegistrationForm() {
           </p>
         )}
         <p className="mt-3 text-sm text-charcoal/70">
-          Ticket: KSh 3,000 (medal, T-shirt and water bottle included).
+          Ticket: KSh {TICKET_PRICE.toLocaleString()} ({megaRun.included} included).
           Registrations without a valid payment reference are not confirmed.
         </p>
       </div>

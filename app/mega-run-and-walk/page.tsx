@@ -1,34 +1,65 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import MpesaBox from "@/components/MpesaBox";
+import { challenge150, megaRun } from "@/lib/site";
 import RegistrationForm from "./RegistrationForm";
 
 export const metadata: Metadata = {
   title: "Mega Walk and Run — 22 November",
   description:
-    "Register for the Autoimmune Support Kenya Mega Walk and Run on Sunday 22 November at The Waterfront, Karen — 3.5 km, 7.5 km and 14.5 km routes supporting autoimmune patients. Tickets KSh 3,000.",
+    "Register for the Autoimmune Support Kenya Mega Walk and Run on Sunday 22 November 2026 at The Hub, Karen — 5 km, 10 km, 15 km and 21 km routes supporting autoimmune patients. Tickets on Madfun from KSh 3,000.",
 };
 
 const categories = [
   {
-    name: "3.5 km",
+    name: "5 km",
     who: "Families, patients, caregivers, and first-time walkers",
     color: "bg-violet-ink",
   },
   {
-    name: "7.5 km",
+    name: "10 km",
     who: "Regular walkers and recreational runners",
     color: "bg-violet-deep",
   },
   {
-    name: "14.5 km",
-    who: "Competitive and experienced runners",
+    name: "15 km",
+    who: "Experienced walkers and runners",
     color: "bg-coral",
+  },
+  {
+    name: "21 km",
+    who: "Half-marathon distance for competitive runners",
+    color: "bg-coral-dark",
   },
 ];
 
-const included = ["Event T-shirt", "Finisher medal", "Water bottle"];
+const posters = [
+  {
+    src: "/images/mega-run/poster-mega-walk-and-run.jpg",
+    alt: "Mega Walk and Run for Auto Immune Awareness — Every Step Counts. Sunday 22 November 2026, 5, 10, 15 and 21 km, The Hub, Karen, starts 7:00 AM. Ticketed by Madfun.",
+  },
+  {
+    src: "/images/mega-run/poster-tickets.jpg",
+    alt: "Mega Walk and Run ticket prices: Early bird KSh 2,000, Advance KSh 3,000, Regular KSh 3,500. Sunday 22 November 2026, The Hub, Karen.",
+  },
+  {
+    src: "/images/mega-run/poster-150km-virtual.jpg",
+    alt: "150km virtual walk and run, 20 October to 19 November, in preparation for the Mega Walk and Run. KSh 3,000 gets a T-shirt and a medal.",
+  },
+  {
+    src: "/images/mega-run/poster-vendor-callout.jpg",
+    alt: "Vendor callout: Bronze KSh 15,000, Silver KSh 30,000, Gold KSh 50,000; package includes tent, seats and tables.",
+  },
+];
+
+// The Paybill route charges the Advance price.
+const TICKET_PRICE = megaRun.tickets[0].price;
+
+const ticketPrices = megaRun.tickets
+  .map((t) => `${t.name} KSh ${t.price.toLocaleString()}`)
+  .join(" · ");
 
 export default function EventPage() {
   return (
@@ -46,23 +77,31 @@ export default function EventPage() {
               For Autoimmune Awareness — Every Step Counts
             </p>
             <p className="mt-5 text-white/85 max-w-xl">
-              Sunday, 22 November at The Waterfront, Karen — a community walk
-              and run in support of autoimmune patients across Kenya. Walk it.
-              Run it. Talk about it. Every registration funds diapers,
-              supplements, assistive gadgets, and medication.
+              {megaRun.date} at {megaRun.venue} — a community walk and run in
+              support of autoimmune patients across Kenya. Walk it. Run it.
+              Talk about it. Every ticket funds diapers, supplements, assistive
+              gadgets, and medication.
             </p>
             <dl className="mt-6 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1.5 text-white/90">
               <dt className="font-bold text-white">Date</dt>
-              <dd>Sunday, 22 November 2026</dd>
+              <dd>{megaRun.date}</dd>
               <dt className="font-bold text-white">Venue</dt>
-              <dd>The Waterfront, Karen</dd>
+              <dd>{megaRun.venue}</dd>
               <dt className="font-bold text-white">Start time</dt>
-              <dd>7:00 AM</dd>
+              <dd>{megaRun.start}</dd>
               <dt className="font-bold text-white">Distances</dt>
-              <dd>3.5 km · 7.5 km · 14.5 km</dd>
-              <dt className="font-bold text-white">Ticket</dt>
-              <dd>KSh 3,000 — includes medal, T-shirt and water bottle</dd>
+              <dd>{megaRun.distances.join(" · ")}</dd>
+              <dt className="font-bold text-white">Tickets</dt>
+              <dd>{ticketPrices} — includes a {megaRun.included}</dd>
             </dl>
+            <a
+              href={megaRun.ticketsUrl}
+              target="_blank"
+              rel="noopener"
+              className="inline-block mt-8 rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-7 py-3.5 transition-colors"
+            >
+              Buy tickets on Madfun
+            </a>
           </div>
           <div className="lg:justify-self-end">
             <Countdown />
@@ -72,7 +111,7 @@ export default function EventPage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-3xl font-bold text-violet-deep">Distances</h2>
-        <div className="mt-8 grid sm:grid-cols-3 gap-5">
+        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {categories.map((c) => (
             <div
               key={c.name}
@@ -88,90 +127,102 @@ export default function EventPage() {
         </div>
       </section>
 
-      <section className="bg-lavender">
-        <div className="mx-auto max-w-6xl px-4 py-14 grid md:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-2xl font-bold text-violet-deep">
-              What&apos;s included
-            </h2>
-            <ul className="mt-5 space-y-3">
-              {included.map((i) => (
-                <li key={i} className="flex items-start gap-3">
-                  <svg viewBox="0 0 20 20" className="h-5 w-5 mt-1 shrink-0 stroke-coral" fill="none" strokeWidth="2.5" strokeLinecap="round" aria-hidden="true">
-                    <path d="m4 10 4 4 8-8" />
-                  </svg>
-                  <span className="font-semibold">{i}</span>
-                </li>
-              ))}
-            </ul>
+      <section id="register" className="bg-lavender scroll-mt-20">
+        <div className="mx-auto max-w-3xl px-4 py-16">
+          <h2 className="text-3xl font-bold text-violet-deep">Get your ticket</h2>
+          <p className="mt-3">
+            Tickets are sold on Madfun — pay by M-Pesa or card, from Kenya or
+            anywhere in the world. Every ticket includes a {megaRun.included}.
+          </p>
+          <div className="mt-8 grid sm:grid-cols-2 gap-5">
+            {megaRun.tickets.map((t) => (
+              <div key={t.name} className="rounded-2xl bg-white p-6 text-center shadow-sm">
+                <h3 className="font-bold uppercase tracking-[0.2em] text-sm text-coral">{t.name}</h3>
+                <p className="mt-2 font-[family-name:var(--font-poppins)] font-extrabold text-3xl text-violet-deep">
+                  <span className="text-base">KSh </span>
+                  {t.price.toLocaleString()}
+                </p>
+              </div>
+            ))}
           </div>
-          <div>
-            <h2 className="text-2xl font-bold text-violet-deep">
-              How to register
-            </h2>
-            <ol className="mt-5 space-y-3 list-none">
-              {[
-                "Pay the KSh 3,000 ticket via M-Pesa — Paybill 880100, account 040444",
-                "Complete the form — name, age, phone, email, distance, T-shirt size, emergency contact",
-                "Paste your M-Pesa confirmation message so we can match your payment",
-                "Get your confirmation by SMS or WhatsApp, then collect your T-shirt and water bottle on the day",
-              ].map((s, i) => (
-                <li key={s} className="flex items-start gap-3">
-                  <span className="h-7 w-7 shrink-0 rounded-full bg-violet-deep text-white font-bold text-sm flex items-center justify-center">
-                    {i + 1}
-                  </span>
-                  <span>{s}</span>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <a
+            href={megaRun.ticketsUrl}
+            target="_blank"
+            rel="noopener"
+            className="inline-block mt-8 rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-8 py-3.5 transition-colors"
+          >
+            Buy tickets on Madfun
+          </a>
+
+          <details className="mt-12 rounded-2xl bg-white p-6 group">
+            <summary className="cursor-pointer font-bold text-violet-deep">
+              Prefer to pay by M-Pesa Paybill? Register here instead
+            </summary>
+            <p className="mt-4">
+              Pay KSh {TICKET_PRICE.toLocaleString()} to our Paybill, then fill
+              in the form and paste your confirmation message so we can match
+              your payment.
+            </p>
+            <p className="mt-8 text-coral font-bold uppercase tracking-[0.25em] text-sm">
+              Step 1 · Pay
+            </p>
+            <MpesaBox
+              className="mt-3"
+              title={`Pay your KSh ${TICKET_PRICE.toLocaleString()} ticket via M-Pesa`}
+              note="Keep the confirmation SMS — you'll paste it in the form below."
+            />
+            <p className="mt-10 text-coral font-bold uppercase tracking-[0.25em] text-sm">
+              Step 2 · Register
+            </p>
+            <RegistrationForm />
+          </details>
         </div>
       </section>
 
-      <section id="register" className="mx-auto max-w-3xl px-4 py-16 scroll-mt-20">
-        <h2 className="text-3xl font-bold text-violet-deep">Register now</h2>
-        <p className="mt-3">
-          Tickets are KSh 3,000 and include a medal, T-shirt and water bottle.
-          Two steps: pay via M-Pesa, then fill in the form and paste your
-          confirmation message so we can match your payment.
-        </p>
-        <p className="mt-8 text-coral font-bold uppercase tracking-[0.25em] text-sm">
-          Step 1 · Pay
-        </p>
-        <MpesaBox
-          className="mt-3"
-          title="Pay your KSh 3,000 ticket via M-Pesa"
-          note="Keep the confirmation SMS — you'll paste it in the form below."
-        />
-        <p className="mt-10 text-coral font-bold uppercase tracking-[0.25em] text-sm">
-          Step 2 · Register
-        </p>
-        <RegistrationForm />
-      </section>
-
-      <section id="virtual" className="bg-lavender scroll-mt-20">
+      <section id="virtual" className="scroll-mt-20">
         <div className="mx-auto max-w-6xl px-4 py-16 grid md:grid-cols-[1fr_auto] gap-8 items-center">
           <div>
             <p className="text-coral font-bold uppercase tracking-[0.25em] text-sm">
-              Launching 20 October
+              Virtual challenge · {challenge150.dates}
             </p>
             <h2 className="mt-2 text-3xl font-bold text-violet-deep">
-              Walk and run virtually — from anywhere
+              150km in a month — walk and run from anywhere
             </h2>
             <p className="mt-4 max-w-2xl">
-              Can&apos;t be in Karen on 22 November? Join the virtual walk and
-              run: for one month, participants across Kenya and abroad log
-              their steps together through a step-tracking app and raise funds
-              for autoimmune patients as they go. Registration and the app link
-              open on 20 October.
+              Join the Founder Saetwa Saitoti and her autoimmune warrior
+              Shannon as they conquer 150km for a month challenge in support
+              of autoimmune warriors. Get a T-shirt and medal for KSh{" "}
+              {challenge150.price.toLocaleString()}, or join on the StepUp app
+              without them.
             </p>
           </div>
           <Link
-            href="/contact?reason=register"
+            href="/150km"
             className="justify-self-start md:justify-self-end rounded-full bg-violet-deep hover:bg-violet-ink text-white font-bold px-7 py-3.5 transition-colors"
           >
-            Tell me when it opens
+            Join the 150km challenge
           </Link>
+        </div>
+      </section>
+
+      <section className="bg-lavender">
+        <div className="mx-auto max-w-6xl px-4 py-16">
+          <h2 className="text-3xl font-bold text-violet-deep">Posters</h2>
+          <p className="mt-3">Share them on WhatsApp, Facebook and Instagram.</p>
+          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {posters.map((p) => (
+              <a key={p.src} href={p.src} target="_blank" rel="noopener" className="block">
+                <Image
+                  src={p.src}
+                  alt={p.alt}
+                  width={1200}
+                  height={1200}
+                  sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw"
+                  className="w-full h-auto rounded-2xl shadow-sm hover:shadow-md transition-shadow"
+                />
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -181,6 +232,18 @@ export default function EventPage() {
             More ways to be part of the day
           </h2>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/vendors"
+              className="rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-6 py-3 transition-colors"
+            >
+              Book a Vendor Stall
+            </Link>
+            <Link
+              href="/warriors"
+              className="rounded-full border-2 border-white/70 hover:border-white text-white font-bold px-6 py-3 transition-colors"
+            >
+              Autoimmune Warrior Registration
+            </Link>
             <Link
               href="/contact?reason=sponsor"
               className="rounded-full border-2 border-white/70 hover:border-white text-white font-bold px-6 py-3 transition-colors"
@@ -192,12 +255,6 @@ export default function EventPage() {
               className="rounded-full border-2 border-white/70 hover:border-white text-white font-bold px-6 py-3 transition-colors"
             >
               Volunteer at the Event
-            </Link>
-            <Link
-              href="#virtual"
-              className="rounded-full bg-coral hover:bg-coral-dark text-white font-bold px-6 py-3 transition-colors"
-            >
-              Walk Virtually (from 20 Oct)
             </Link>
           </div>
         </div>
