@@ -29,6 +29,16 @@ export const megaRun = {
   included: "T-shirt and finisher medal",
 };
 
+// Event partners, in the order printed on the October 2026 posters.
+export const partners = [
+  "HealthyU",
+  "INETIQ Fit",
+  "IPCA",
+  "Decathlon",
+  "The Hub Karen",
+  "PathCare Medical Laboratory Kenya",
+];
+
 // Vendor stall packages; each includes a tent, seats and tables.
 export const vendorPackages = [
   { name: "Bronze", price: 15000 },

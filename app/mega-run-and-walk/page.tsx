@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Countdown from "@/components/Countdown";
 import MpesaBox from "@/components/MpesaBox";
-import { challenge150, megaRun } from "@/lib/site";
+import { challenge150, megaRun, partners } from "@/lib/site";
 import RegistrationForm from "./RegistrationForm";
 
 export const metadata: Metadata = {
@@ -42,7 +42,11 @@ const posters = [
   },
   {
     src: "/images/mega-run/poster-tickets.jpg",
-    alt: "Mega Walk and Run ticket prices: Early bird KSh 2,000, Advance KSh 3,000, Regular KSh 3,500. Sunday 22 November 2026, The Hub, Karen.",
+    alt: "Mega Walk and Run ticket prices: Advance KSh 3,000, Regular KSh 3,500. Sunday 22 November 2026, The Hub, Karen.",
+  },
+  {
+    src: "/images/mega-run/poster-early-bird-sold-out.jpg",
+    alt: "Early bird tickets at KSh 2,000 are sold out. Advance and regular tickets are still available on Madfun.",
   },
   {
     src: "/images/mega-run/poster-150km-virtual.jpg",
@@ -51,6 +55,10 @@ const posters = [
   {
     src: "/images/mega-run/poster-vendor-callout.jpg",
     alt: "Vendor callout: Bronze KSh 15,000, Silver KSh 30,000, Gold KSh 50,000; package includes tent, seats and tables.",
+  },
+  {
+    src: "/images/mega-run/poster-partners.jpg",
+    alt: "Our partners: HealthyU, IPCA, The Hub Karen, INETIQ Fit, Decathlon and PathCare Medical Laboratory Kenya.",
   },
 ];
 
@@ -205,11 +213,37 @@ export default function EventPage() {
         </div>
       </section>
 
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <p className="text-coral font-bold uppercase tracking-[0.25em] text-sm">
+          Our partners
+        </p>
+        <h2 className="mt-2 text-3xl font-bold text-violet-deep">
+          Walking with us this year
+        </h2>
+        <ul className="mt-6 flex flex-wrap gap-3">
+          {partners.map((name) => (
+            <li
+              key={name}
+              className="rounded-full border-2 border-lavender px-5 py-2.5 font-bold text-violet-deep"
+            >
+              {name}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-[0.95rem] text-charcoal/70">
+          Want to join them?{" "}
+          <Link href="/contact?reason=sponsor" className="font-bold text-coral hover:text-coral-dark">
+            Become a sponsor
+          </Link>
+          .
+        </p>
+      </section>
+
       <section className="bg-lavender">
         <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-3xl font-bold text-violet-deep">Posters</h2>
           <p className="mt-3">Share them on WhatsApp, Facebook and Instagram.</p>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {posters.map((p) => (
               <a key={p.src} href={p.src} target="_blank" rel="noopener" className="block">
                 <Image
@@ -217,7 +251,7 @@ export default function EventPage() {
                   alt={p.alt}
                   width={1200}
                   height={1200}
-                  sizes="(min-width: 1024px) 270px, (min-width: 640px) 50vw, 100vw"
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
                   className="w-full h-auto rounded-2xl shadow-sm hover:shadow-md transition-shadow"
                 />
               </a>
