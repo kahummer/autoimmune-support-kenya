@@ -24,15 +24,19 @@ const GOOGLE_FORM_ENTRIES: Record<string, string> = {
   mpesaAmount: "entry.542231448",
 };
 
-const TICKET_PRICE = megaRun.tickets[0].price;
-
 const inputCls =
   "w-full rounded-lg border-2 border-lavender bg-white px-4 py-2.5 focus:border-violet-deep transition-colors";
 const labelCls = "block font-bold text-sm text-violet-deep mb-1.5";
 
 type Status = "idle" | "submitting" | "submitted" | "error";
 
-export default function RegistrationForm() {
+// `price` is what the registrant must have paid via Paybill; the Advance
+// ticket price unless a group offer page passes its own.
+export default function RegistrationForm({
+  price: TICKET_PRICE = megaRun.tickets[0].price,
+}: {
+  price?: number;
+}) {
   const [status, setStatus] = useState<Status>("idle");
   const [mpesaError, setMpesaError] = useState<string | null>(null);
   const [receipt, setReceipt] = useState<{ code: string; amount: number | null } | null>(null);
@@ -169,7 +173,7 @@ export default function RegistrationForm() {
           rows={4}
           required
           className={inputCls}
-          placeholder="Dear JANE DOE, your transaction of KES 3,000.00 to AUTOIMMUNE AWARENESS 040444 was successful on 22/10/2026 09:15 AM. M-Pesa Ref: AB1CD2EF34."
+          placeholder={`Dear JANE DOE, your transaction of KES ${TICKET_PRICE.toLocaleString()}.00 to AUTOIMMUNE AWARENESS ${site.mpesa.account} was successful on 22/10/2026 09:15 AM. M-Pesa Ref: AB1CD2EF34.`}
           aria-describedby={mpesaError ? "reg-mpesa-error" : undefined}
           aria-invalid={mpesaError ? true : undefined}
           onChange={() => mpesaError && setMpesaError(null)}

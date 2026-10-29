@@ -2,7 +2,7 @@
 
 import PaidSignupForm from "@/components/PaidSignupForm";
 import { postToGoogleForm } from "@/lib/mpesa";
-import { site, vendorPackages } from "@/lib/site";
+import { site, vendorAgreedPrices, vendorPackages } from "@/lib/site";
 
 // "Mega Walk and Run 2026 – Vendor Sign-up" Google Form (created by
 // scripts/create-forms.gs); responses land in its linked Sheet. If a question
@@ -33,6 +33,7 @@ export default function VendorForm() {
       minAmount={(v) =>
         vendorPackages.find((p) => packageLabel(p) === v.package)?.price ?? vendorPackages[0].price
       }
+      acceptAmounts={vendorAgreedPrices}
       submitLabel="Book my vendor stall"
       fields={[
         { name: "business", label: "Business name", autoComplete: "organization" },

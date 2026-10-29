@@ -34,6 +34,7 @@ export default function PaidSignupForm({
   amount,
   amountFor,
   minAmount = () => amount,
+  acceptAmounts = [],
   submitLabel,
   consent,
   success,
@@ -45,6 +46,8 @@ export default function PaidSignupForm({
   amountFor: string;
   // Lets the minimum depend on the form's answers (e.g. the vendor package).
   minAmount?: (values: Record<string, string>) => number;
+  // Exact amounts accepted even when below the minimum (privately agreed prices).
+  acceptAmounts?: number[];
   submitLabel: string;
   consent?: string;
   success: (receipt: MpesaReceipt) => ReactNode;
@@ -58,7 +61,12 @@ export default function PaidSignupForm({
     const values = Object.fromEntries(
       [...new FormData(e.currentTarget)].map(([k, v]) => [k, String(v)])
     );
-    const checked = checkMpesaMessage(values.mpesaMessage ?? "", minAmount(values), amountFor);
+    const checked = checkMpesaMessage(
+      values.mpesaMessage ?? "",
+      minAmount(values),
+      amountFor,
+      acceptAmounts
+    );
     if ("error" in checked) {
       setMpesaError(checked.error);
       return;

@@ -46,8 +46,20 @@ export const vendorPackages = [
   { name: "Gold", price: 50000 },
 ];
 
+// Smaller stall prices agreed with individual vendors over WhatsApp. They're
+// not listed on the page or in the form; the form just accepts a payment
+// for one of these amounts.
+export const vendorAgreedPrices = [5000, 8000];
+
 // Autoimmune warrior registration fee; proceeds support bereaved families.
 export const warriorFee = 100;
+
+// Group offer: runners signing up through a running club pay a reduced
+// Paybill price on their own unlisted page (/run/<slug>) and land in the same
+// registration Google Form as everyone else.
+export const groupOffers = [
+  { slug: "featbeat", name: "Featbeat", price: 2500 },
+];
 
 // 150km virtual walk and run, 20 October – 19 November 2026.
 export const challenge150 = {
