@@ -7,7 +7,7 @@ import { groupOffers, megaRun, site } from "@/lib/site";
 import RegistrationForm from "@/app/mega-run-and-walk/RegistrationForm";
 
 // Unlisted sign-up pages for running clubs joining at an agreed price, e.g.
-// /run/featbeat. Shared directly with the club; not linked from the menu or
+// /run/fitbeat. Shared directly with the club; not linked from the menu or
 // indexed by search engines. Registrations go into the same Google Form and
 // Sheet as the main Paybill form, with the amount column showing the group
 // price.

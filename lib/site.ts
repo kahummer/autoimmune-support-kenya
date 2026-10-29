@@ -58,7 +58,7 @@ export const warriorFee = 100;
 // Paybill price on their own unlisted page (/run/<slug>) and land in the same
 // registration Google Form as everyone else.
 export const groupOffers = [
-  { slug: "featbeat", name: "Featbeat", price: 2500 },
+  { slug: "fitbeat", name: "Fitbeat", price: 2500 },
 ];
 
 // 150km virtual walk and run, 20 October – 19 November 2026.
