@@ -31,11 +31,14 @@ const labelCls = "block font-bold text-sm text-violet-deep mb-1.5";
 type Status = "idle" | "submitting" | "submitted" | "error";
 
 // `price` is what the registrant must have paid via Paybill; the Advance
-// ticket price unless a group offer page passes its own.
+// ticket price unless a group offer page passes its own (and, optionally,
+// what that price includes).
 export default function RegistrationForm({
   price: TICKET_PRICE = megaRun.tickets[0].price,
+  included = megaRun.included,
 }: {
   price?: number;
+  included?: string;
 }) {
   const [status, setStatus] = useState<Status>("idle");
   const [mpesaError, setMpesaError] = useState<string | null>(null);
@@ -203,7 +206,7 @@ export default function RegistrationForm({
           </p>
         )}
         <p className="mt-3 text-sm text-charcoal/70">
-          Ticket: KSh {TICKET_PRICE.toLocaleString()} ({megaRun.included} included).
+          Ticket: KSh {TICKET_PRICE.toLocaleString()} ({included} included).
           Registrations without a valid payment reference are not confirmed.
         </p>
       </div>

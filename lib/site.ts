@@ -54,11 +54,32 @@ export const vendorAgreedPrices = [5000, 8000];
 // Autoimmune warrior registration fee; proceeds support bereaved families.
 export const warriorFee = 100;
 
-// Group offer: runners signing up through a running club pay a reduced
-// Paybill price on their own unlisted page (/run/<slug>) and land in the same
-// registration Google Form as everyone else.
-export const groupOffers = [
+// Group offers: people signing up through a running club (or another agreed
+// group) pay a reduced Paybill price on their own unlisted page
+// (/run/<slug>) and land in the same registration Google Form as everyone
+// else. Optional wording, with defaults for a running club:
+//   who      – who the page addresses ("<name> runners")
+//   eligible – who the price is for ("<name> members")
+//   included – what the price covers (megaRun.included)
+export type GroupOffer = {
+  slug: string;
+  name: string;
+  price: number;
+  who?: string;
+  eligible?: string;
+  included?: string;
+};
+
+export const groupOffers: GroupOffer[] = [
   { slug: "fitbeat", name: "Fitbeat", price: 2500 },
+  {
+    slug: "patients",
+    name: "Autoimmune warrior",
+    price: 1000,
+    who: "Autoimmune warriors",
+    eligible: "people living with an autoimmune condition",
+    included: "T-shirt",
+  },
 ];
 
 // 150km virtual walk and run, 20 October – 19 November 2026.
